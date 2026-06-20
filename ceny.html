@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Цены стоматологии ЛУМИНА и онлайн-калькулятор стоимости лечения.">
+<title>Цены и калькулятор — ЛУМИНА</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="progress"></div>
+<header class="hdr" id="hdr"><div class="wrap nav">
+  <a class="logo" href="index.html">ЛУМ<span>ИНА</span></a>
+  <nav class="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="uslugi.html">Услуги</a>
+    <a href="vrachi.html">Врачи</a>
+    <a href="ceny.html" class="active">Цены</a>
+    <a href="kontakty.html">Контакты</a>
+  </nav>
+  <div class="nav-right">
+    <a href="tel:+73952000000" class="phone">+7 (3952) 00-00-00</a>
+    <a href="kontakty.html#zapis" class="btn">Записаться</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</div></header>
+<div class="overlay" id="overlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Главная</a>
+  <a href="uslugi.html">Услуги</a>
+  <a href="vrachi.html">Врачи</a>
+  <a href="ceny.html">Цены</a>
+  <a href="kontakty.html">Контакты</a>
+  <a href="tel:+73952000000" class="phone">+7 (3952) 00-00-00</a>
+  <a href="kontakty.html#zapis" class="btn">Записаться на приём</a>
+</nav>
+
+<section class="phead"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> / Цены</div>
+  <h1>Цены и калькулятор лечения</h1>
+  <p>Фиксированная стоимость до начала лечения. Посчитайте примерную сумму прямо сейчас — окончательную врач назовёт на консультации.</p>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="section-head reveal"><span class="section-tag">Калькулятор</span><h2 class="section-title">Рассчитайте стоимость лечения</h2><p>Отметьте нужные процедуры — сумма посчитается автоматически.</p></div>
+  <div class="calc reveal" id="calc">
+    <div>
+      <h3>Выберите процедуры</h3>
+      <div class="sub">Цены ориентировочные, за один зуб/единицу.</div>
+      <label class="calc-opt"><input type="checkbox" data-price="3000"><span class="nm">Лечение кариеса + пломба</span><span class="pr">3 000 ₽</span></label>
+      <label class="calc-opt"><input type="checkbox" data-price="6500"><span class="nm">Лечение каналов (эндодонтия)</span><span class="pr">6 500 ₽</span></label>
+      <label class="calc-opt"><input type="checkbox" data-price="4000"><span class="nm">Профгигиена Air Flow</span><span class="pr">4 000 ₽</span></label>
+      <label class="calc-opt"><input type="checkbox" data-price="12000"><span class="nm">Отбеливание (обе челюсти)</span><span class="pr">12 000 ₽</span></label>
+      <label class="calc-opt"><input type="checkbox" data-price="35000"><span class="nm">Имплант премиум-бренда</span><span class="pr">35 000 ₽</span></label>
+      <label class="calc-opt"><input type="checkbox" data-price="22000"><span class="nm">Коронка из циркония</span><span class="pr">22 000 ₽</span></label>
+      <label class="calc-opt"><input type="checkbox" data-price="18000"><span class="nm">Винир (за 1 зуб)</span><span class="pr">18 000 ₽</span></label>
+      <label class="calc-opt"><input type="checkbox" data-price="90000"><span class="nm">Брекет-система (курс)</span><span class="pr">90 000 ₽</span></label>
+    </div>
+    <div class="calc-side">
+      <div class="total-lbl">Примерная стоимость</div>
+      <div class="total" id="calcTotal">0 ₽</div>
+      <div class="hint">Выбрано процедур: <b id="calcCount">0</b>. Рассрочка 0% до 12 месяцев.</div>
+      <a href="kontakty.html#zapis" class="btn">Записаться на расчёт</a>
+    </div>
+  </div>
+</div></section>
+
+<section class="block" style="background:var(--soft2)"><div class="wrap">
+  <div class="section-head reveal"><span class="section-tag">Прайс-лист</span><h2 class="section-title">Основные цены</h2></div>
+  <div class="reveal"><table class="ptable">
+    <tr><th>Услуга</th><th>Стоимость</th></tr>
+    <tr><td>Консультация и осмотр</td><td>бесплатно</td></tr>
+    <tr><td>Лечение кариеса + пломба</td><td>от 2 500 ₽</td></tr>
+    <tr><td>Лечение каналов</td><td>от 6 500 ₽</td></tr>
+    <tr><td>Профессиональная гигиена</td><td>от 4 000 ₽</td></tr>
+    <tr><td>Отбеливание</td><td>от 12 000 ₽</td></tr>
+    <tr><td>Имплантация (под ключ)</td><td>от 35 000 ₽</td></tr>
+    <tr><td>Винир (за 1 зуб)</td><td>от 18 000 ₽</td></tr>
+    <tr><td>Брекет-система (курс)</td><td>от 90 000 ₽</td></tr>
+  </table></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="section-head center reveal"><span class="section-tag">Пакеты</span><h2 class="section-title">Готовые решения</h2></div>
+  <div class="price-grid">
+    <div class="plan reveal s1"><h3>Профилактика</h3><div class="from">для здоровой улыбки</div><div class="cost">4 000 ₽</div><ul><li>Осмотр и консультация</li><li>Чистка Air Flow</li><li>Снятие зубного камня</li><li>Полировка и фторирование</li></ul><a href="kontakty.html#zapis" class="btn btn-ghost" style="width:100%;text-align:center">Записаться</a></div>
+    <div class="plan popular reveal s2"><div class="badge">ПОПУЛЯРНОЕ</div><h3>Лечение «под ключ»</h3><div class="from">кариес + гигиена</div><div class="cost">9 900 ₽</div><ul><li>Всё из «Профилактики»</li><li>Лечение до 2 зубов</li><li>Эстетичные пломбы</li><li>Контрольный осмотр бесплатно</li></ul><a href="kontakty.html#zapis" class="btn" style="width:100%;text-align:center">Записаться</a></div>
+    <div class="plan reveal s3"><h3>Имплантация</h3><div class="from">восстановление зуба</div><div class="cost">35 000 ₽</div><ul><li>Имплант премиум-бренда</li><li>Установка за один визит</li><li>Временная коронка</li><li>Пожизненная гарантия импланта</li></ul><a href="kontakty.html#zapis" class="btn btn-ghost" style="width:100%;text-align:center">Записаться</a></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="foot-grid">
+    <div><a class="logo" href="index.html">ЛУМ<span>ИНА</span></a><p>Стоматология премиум-класса в центре Иркутска. Лечим бережно, работаем честно.</p><p style="margin-top:14px">г. Иркутск, ул. Карла Маркса, 1</p></div>
+    <div><h4>Разделы</h4><ul><li><a href="uslugi.html">Услуги</a></li><li><a href="vrachi.html">Врачи</a></li><li><a href="ceny.html">Цены</a></li><li><a href="kontakty.html">Контакты</a></li></ul></div>
+    <div><h4>Контакты</h4><ul><li><a href="tel:+73952000000">+7 (3952) 00-00-00</a></li><li>Ежедневно 9:00 – 21:00</li><li><a href="kontakty.html#zapis">Записаться онлайн</a></li><li>Telegram · WhatsApp</li></ul></div>
+  </div>
+  <div class="foot-bot"><span>© 2026 Стоматология «ЛУМИНА». Демо-проект.</span><span>Сделано как кейс веб-студии</span></div>
+</div></footer>
+<script src="app.js"></script>
+</body>
+</html>
