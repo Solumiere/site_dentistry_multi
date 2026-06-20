@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Врачи стоматологии ЛУМИНА — имплантологи, ортодонты, терапевты, детские стоматологи. Каталог с фильтрами.">
+<title>Врачи — ЛУМИНА</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="progress"></div>
+<header class="hdr" id="hdr"><div class="wrap nav">
+  <a class="logo" href="index.html">ЛУМ<span>ИНА</span></a>
+  <nav class="nav-links">
+    <a href="index.html">Главная</a>
+    <a href="uslugi.html">Услуги</a>
+    <a href="vrachi.html" class="active">Врачи</a>
+    <a href="ceny.html">Цены</a>
+    <a href="kontakty.html">Контакты</a>
+  </nav>
+  <div class="nav-right">
+    <a href="tel:+73952000000" class="phone">+7 (3952) 00-00-00</a>
+    <a href="kontakty.html#zapis" class="btn">Записаться</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</div></header>
+<div class="overlay" id="overlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Главная</a>
+  <a href="uslugi.html">Услуги</a>
+  <a href="vrachi.html">Врачи</a>
+  <a href="ceny.html">Цены</a>
+  <a href="kontakty.html">Контакты</a>
+  <a href="tel:+73952000000" class="phone">+7 (3952) 00-00-00</a>
+  <a href="kontakty.html#zapis" class="btn">Записаться на приём</a>
+</nav>
+
+<section class="phead"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Главная</a> / Врачи</div>
+  <h1>Врачи, которым доверяют</h1>
+  <p>Каждый специалист регулярно проходит обучение и работает по протоколам доказательной медицины. Выберите специализацию.</p>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="filters reveal">
+    <button class="filt active" data-filter="all">Все врачи</button>
+    <button class="filt" data-filter="surgery">Хирургия и имплантация</button>
+    <button class="filt" data-filter="therapy">Терапия</button>
+    <button class="filt" data-filter="ortho">Ортодонтия</button>
+    <button class="filt" data-filter="estetic">Эстетика и ортопедия</button>
+    <button class="filt" data-filter="child">Детская</button>
+  </div>
+  <div class="grid grid-4">
+    <div class="doc reveal s1" data-spec="surgery"><div class="av">АС</div><div class="info"><h3>Андрей Соколов</h3><div class="role">Главный врач, имплантолог-хирург</div><p>Стаж 16 лет. Более 3 000 установленных имплантов.</p><div class="tags"><span>Имплантация</span><span>Хирургия</span></div></div></div>
+    <div class="doc reveal s2" data-spec="estetic"><div class="av">ДО</div><div class="info"><h3>Дмитрий Орлов</h3><div class="role">Ортопед, эстетист</div><p>Стаж 12 лет. Специалист по винирам и реставрации.</p><div class="tags"><span>Виниры</span><span>Протезирование</span></div></div></div>
+    <div class="doc reveal s3" data-spec="therapy"><div class="av">ЕВ</div><div class="info"><h3>Елена Власова</h3><div class="role">Терапевт, эндодонтист</div><p>Стаж 10 лет. Лечение каналов под микроскопом.</p><div class="tags"><span>Кариес</span><span>Каналы</span></div></div></div>
+    <div class="doc reveal s4" data-spec="child"><div class="av">ИЛ</div><div class="info"><h3>Игорь Лебедев</h3><div class="role">Детский стоматолог</div><p>Стаж 9 лет. Находит подход к самым маленьким.</p><div class="tags"><span>Детский приём</span></div></div></div>
+    <div class="doc reveal s1" data-spec="ortho"><div class="av">МЗ</div><div class="info"><h3>Марина Зайцева</h3><div class="role">Врач-ортодонт</div><p>Стаж 11 лет. Брекеты и элайнеры для любого возраста.</p><div class="tags"><span>Брекеты</span><span>Элайнеры</span></div></div></div>
+    <div class="doc reveal s2" data-spec="surgery"><div class="av">СК</div><div class="info"><h3>Сергей Кузнецов</h3><div class="role">Хирург-имплантолог</div><p>Стаж 14 лет. Сложная имплантация и костная пластика.</p><div class="tags"><span>Имплантация</span><span>Хирургия</span></div></div></div>
+    <div class="doc reveal s3" data-spec="therapy"><div class="av">ОН</div><div class="info"><h3>Ольга Новикова</h3><div class="role">Гигиенист, терапевт</div><p>Стаж 8 лет. Профгигиена и профилактика Air Flow.</p><div class="tags"><span>Гигиена</span><span>Отбеливание</span></div></div></div>
+    <div class="doc reveal s4" data-spec="estetic"><div class="av">ПМ</div><div class="info"><h3>Павел Морозов</h3><div class="role">Врач-ортопед</div><p>Стаж 13 лет. Коронки, мосты и протезы под ключ.</p><div class="tags"><span>Протезирование</span></div></div></div>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="cta-strip reveal"><h2>Не знаете, к какому врачу записаться?</h2><p>Оставьте заявку — администратор подберёт специалиста под вашу задачу и удобное время.</p><a href="kontakty.html#zapis" class="btn">Записаться на консультацию</a></div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="foot-grid">
+    <div><a class="logo" href="index.html">ЛУМ<span>ИНА</span></a><p>Стоматология премиум-класса в центре Иркутска. Лечим бережно, работаем честно.</p><p style="margin-top:14px">г. Иркутск, ул. Карла Маркса, 1</p></div>
+    <div><h4>Разделы</h4><ul><li><a href="uslugi.html">Услуги</a></li><li><a href="vrachi.html">Врачи</a></li><li><a href="ceny.html">Цены</a></li><li><a href="kontakty.html">Контакты</a></li></ul></div>
+    <div><h4>Контакты</h4><ul><li><a href="tel:+73952000000">+7 (3952) 00-00-00</a></li><li>Ежедневно 9:00 – 21:00</li><li><a href="kontakty.html#zapis">Записаться онлайн</a></li><li>Telegram · WhatsApp</li></ul></div>
+  </div>
+  <div class="foot-bot"><span>© 2026 Стоматология «ЛУМИНА». Демо-проект.</span><span>Сделано как кейс веб-студии</span></div>
+</div></footer>
+<script src="app.js"></script>
+</body>
+</html>
