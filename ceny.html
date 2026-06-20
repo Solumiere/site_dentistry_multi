@@ -3,9 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Цены стоматологии ЛУМИНА и онлайн-калькулятор стоимости лечения.">
-<title>Цены и калькулятор — ЛУМИНА</title>
+<meta name="description" content="Цены на стоматологию ЛУМИНА в Иркутске. Онлайн-калькулятор лечения зубов и подробный прайс с гарантиями.">
+<title>Цены и калькулятор лечения — ЛУМИНА</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.tc{background:#fff;border:1px solid var(--line,#e8e6e1);border-radius:24px;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,.05)}
+.tc-tabs{display:inline-flex;background:var(--soft2,#f4f1ec);border-radius:999px;padding:5px;margin-bottom:6px}
+.tc-tab{border:0;background:transparent;padding:10px 22px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer;color:var(--muted,#6b6b6b)}
+.tc-tab.on{background:var(--accent,#0e8f7e);color:#fff}
+.tc-note{font-size:13px;color:var(--muted,#7a7a7a);background:var(--soft2,#f6f4ef);border-radius:12px;padding:10px 14px;margin:14px 0 22px;line-height:1.45}
+.tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.tc-arch{display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;padding:22px;background:var(--soft2,#f6f4ef);border-radius:18px}
+.tc-row{display:flex;gap:20px}
+.tc-quad{display:flex;gap:6px}
+.tooth{width:30px;height:38px;border:1.5px solid #cfd6d3;background:#fff;border-radius:8px 8px 13px 13px;font-size:12px;font-weight:700;color:#5a6b66;cursor:pointer;transition:.15s}
+.tooth:hover{border-color:var(--accent,#0e8f7e);transform:translateY(-2px)}
+.tooth.active{border-color:var(--accent,#0e8f7e);box-shadow:0 0 0 3px rgba(14,143,126,.18)}
+.tooth.filled{background:var(--accent,#0e8f7e);color:#fff;border-color:var(--accent,#0e8f7e)}
+.tc-symhead{font-weight:700;margin-bottom:14px;font-size:17px}
+.tc-sym{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line,#e8e6e1);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.15s}
+.tc-sym:hover{border-color:var(--accent,#0e8f7e)}
+.tc-sym.on{border-color:var(--accent,#0e8f7e);background:rgba(14,143,126,.06)}
+.tc-sym input{width:18px;height:18px;accent-color:var(--accent,#0e8f7e);flex:none}
+.tc-symt{flex:1;font-size:14px;line-height:1.3}
+.tc-symt i{display:block;font-style:normal;font-size:12px;color:var(--muted,#8a8a8a);margin-top:3px}
+.tc-sym b{white-space:nowrap;font-size:14px}
+.tc-empty{color:var(--muted,#9a9a9a);font-size:14px;padding:24px 6px;text-align:center;line-height:1.5}
+.tc-sum{margin-top:26px;border-top:1px dashed var(--line,#ddd);padding-top:20px}
+.tc-line{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:14px;border-bottom:1px solid var(--soft2,#f0ede8)}
+.tc-foot{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px;flex-wrap:wrap}
+.tc-total{font-size:14px;color:var(--muted,#777)}
+.tc-total b{display:block;font-size:30px;color:var(--ink,#1a1a1a);font-weight:800;margin-top:2px}
+#tcClear{border:0;background:transparent;color:var(--muted,#888);cursor:pointer;font:inherit;text-decoration:underline;margin-top:12px}
+.tc-disc{font-size:12px;color:var(--muted,#9a9a9a);margin-top:16px;line-height:1.5}
+.ptable{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line,#e8e6e1);border-radius:16px;overflow:hidden}
+.ptable th{background:var(--soft2,#f4f1ec);text-align:left;padding:13px 18px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted,#6b6b6b)}
+.ptable td{padding:14px 18px;border-top:1px solid var(--soft2,#f0ede8);vertical-align:top;font-size:14px}
+.ptable .pn{font-weight:600}
+.ptable .pd{color:var(--muted,#7a7a7a);font-size:13px;margin-top:3px;line-height:1.4}
+.ptable .pp{white-space:nowrap;font-weight:700}
+.ptable .pg{white-space:nowrap;color:var(--accent,#0e8f7e);font-size:13px}
+.pcat{font-weight:800;font-size:20px;margin:38px 0 14px}
+@media(max-width:760px){.tc-grid{grid-template-columns:1fr}.ptable thead{display:none}.ptable td{display:block;border:0;padding:3px 16px}.ptable td.pp,.ptable td.pg{padding-bottom:14px}.ptable tr{display:block;border-top:1px solid var(--soft2,#eee);padding:12px 0}}
+</style>
 </head>
 <body>
 <div id="progress"></div>
@@ -37,55 +77,82 @@
 
 <section class="phead"><div class="wrap">
   <div class="crumbs"><a href="index.html">Главная</a> / Цены</div>
-  <h1>Цены и калькулятор лечения</h1>
-  <p>Фиксированная стоимость до начала лечения. Посчитайте примерную сумму прямо сейчас — окончательную врач назовёт на консультации.</p>
+  <h1>Цены и онлайн-расчёт</h1>
+  <p>Отметьте беспокоящие зубы на схеме — калькулятор покажет примерную стоимость. Ниже — подробный прайс с описаниями и гарантиями.</p>
 </div></section>
 
 <section class="block"><div class="wrap">
-  <div class="section-head reveal"><span class="section-tag">Калькулятор</span><h2 class="section-title">Рассчитайте стоимость лечения</h2><p>Отметьте нужные процедуры — сумма посчитается автоматически.</p></div>
-  <div class="calc reveal" id="calc">
-    <div>
-      <h3>Выберите процедуры</h3>
-      <div class="sub">Цены ориентировочные, за один зуб/единицу.</div>
-      <label class="calc-opt"><input type="checkbox" data-price="3000"><span class="nm">Лечение кариеса + пломба</span><span class="pr">3 000 ₽</span></label>
-      <label class="calc-opt"><input type="checkbox" data-price="6500"><span class="nm">Лечение каналов (эндодонтия)</span><span class="pr">6 500 ₽</span></label>
-      <label class="calc-opt"><input type="checkbox" data-price="4000"><span class="nm">Профгигиена Air Flow</span><span class="pr">4 000 ₽</span></label>
-      <label class="calc-opt"><input type="checkbox" data-price="12000"><span class="nm">Отбеливание (обе челюсти)</span><span class="pr">12 000 ₽</span></label>
-      <label class="calc-opt"><input type="checkbox" data-price="35000"><span class="nm">Имплант премиум-бренда</span><span class="pr">35 000 ₽</span></label>
-      <label class="calc-opt"><input type="checkbox" data-price="22000"><span class="nm">Коронка из циркония</span><span class="pr">22 000 ₽</span></label>
-      <label class="calc-opt"><input type="checkbox" data-price="18000"><span class="nm">Винир (за 1 зуб)</span><span class="pr">18 000 ₽</span></label>
-      <label class="calc-opt"><input type="checkbox" data-price="90000"><span class="nm">Брекет-система (курс)</span><span class="pr">90 000 ₽</span></label>
+  <div class="section-head reveal"><span class="section-tag">Калькулятор</span><h2 class="section-title">Рассчитайте лечение онлайн</h2></div>
+  <div id="toothCalc" class="tc reveal">
+    <div class="tc-tabs">
+      <button class="tc-tab on" data-mode="adult" type="button">Для взрослых</button>
+      <button class="tc-tab" data-mode="child" type="button">Для детей</button>
     </div>
-    <div class="calc-side">
-      <div class="total-lbl">Примерная стоимость</div>
-      <div class="total" id="calcTotal">0 ₽</div>
-      <div class="hint">Выбрано процедур: <b id="calcCount">0</b>. Рассрочка 0% до 12 месяцев.</div>
-      <a href="kontakty.html#zapis" class="btn">Записаться на расчёт</a>
+    <div class="tc-note">На схеме 28 зубов — без «зубов мудрости». Кликните по беспокоящему зубу и отметьте симптомы — покажем примерную стоимость лечения.</div>
+    <div class="tc-grid">
+      <div id="tcArch" class="tc-arch"></div>
+      <div id="tcSymptoms"></div>
+    </div>
+    <div class="tc-sum">
+      <div id="tcSummary"></div>
+      <div class="tc-foot">
+        <div class="tc-total">Примерная стоимость<b id="tcTotal">0 ₽</b></div>
+        <a href="kontakty.html#zapis" class="btn">Записаться на консультацию</a>
+      </div>
+      <button id="tcClear" type="button">Очистить всё</button>
+      <div class="tc-disc">* Стоимость предварительная. Точный план лечения и цену определяет врач на очной консультации после осмотра и диагностики.</div>
     </div>
   </div>
 </div></section>
 
-<section class="block" style="background:var(--soft2)"><div class="wrap">
-  <div class="section-head reveal"><span class="section-tag">Прайс-лист</span><h2 class="section-title">Основные цены</h2></div>
-  <div class="reveal"><table class="ptable">
-    <tr><th>Услуга</th><th>Стоимость</th></tr>
-    <tr><td>Консультация и осмотр</td><td>бесплатно</td></tr>
-    <tr><td>Лечение кариеса + пломба</td><td>от 2 500 ₽</td></tr>
-    <tr><td>Лечение каналов</td><td>от 6 500 ₽</td></tr>
-    <tr><td>Профессиональная гигиена</td><td>от 4 000 ₽</td></tr>
-    <tr><td>Отбеливание</td><td>от 12 000 ₽</td></tr>
-    <tr><td>Имплантация (под ключ)</td><td>от 35 000 ₽</td></tr>
-    <tr><td>Винир (за 1 зуб)</td><td>от 18 000 ₽</td></tr>
-    <tr><td>Брекет-система (курс)</td><td>от 90 000 ₽</td></tr>
-  </table></div>
+<section class="block" style="background:var(--soft2);padding-top:0"><div class="wrap">
+  <div class="section-head reveal"><span class="section-tag">Прайс-лист</span><h2 class="section-title">Стоимость услуг с описанием</h2><p>Цены указаны «от» и включают диагностику, анестезию и расходные материалы. Без скрытых платежей.</p></div>
+
+  <h3 class="pcat reveal">Терапия</h3>
+  <table class="ptable reveal"><thead><tr><th>Услуга</th><th>Цена</th><th>Гарантия</th></tr></thead><tbody>
+    <tr><td><div class="pn">Консультация и осмотр</div><div class="pd">Первичный приём, план лечения, ответы на вопросы</div></td><td class="pp">Бесплатно</td><td class="pg">—</td></tr>
+    <tr><td><div class="pn">Лечение начального кариеса</div><div class="pd">Без сверления — реминерализация и фторирование эмали</div></td><td class="pp">от 2 500 ₽</td><td class="pg">2 года</td></tr>
+    <tr><td><div class="pn">Лечение кариеса с пломбой</div><div class="pd">Анестезия, изоляция, пломба, шлифовка и полировка</div></td><td class="pp">от 4 000 ₽</td><td class="pg">3 года</td></tr>
+    <tr><td><div class="pn">Лечение пульпита (каналы)</div><div class="pd">Лечение каналов под микроскопом, горячая заливка</div></td><td class="pp">от 9 000 ₽</td><td class="pg">5 лет</td></tr>
+    <tr><td><div class="pn">Художественная реставрация</div><div class="pd">Восстановление формы и цвета зуба композитом</div></td><td class="pp">от 5 000 ₽</td><td class="pg">3 года</td></tr>
+  </tbody></table>
+
+  <h3 class="pcat reveal">Хирургия и имплантация</h3>
+  <table class="ptable reveal"><thead><tr><th>Услуга</th><th>Цена</th><th>Гарантия</th></tr></thead><tbody>
+    <tr><td><div class="pn">Удаление зуба (простое)</div><div class="pd">Анестезия, удаление, рекомендации по заживлению</div></td><td class="pp">от 2 500 ₽</td><td class="pg">—</td></tr>
+    <tr><td><div class="pn">Удаление зуба мудрости</div><div class="pd">Сложное удаление с КТ-контролем</div></td><td class="pp">от 6 000 ₽</td><td class="pg">—</td></tr>
+    <tr><td><div class="pn">Имплантация под ключ</div><div class="pd">Имплант премиум-бренда + коронка, установка за визит</div></td><td class="pp">от 35 000 ₽</td><td class="pg">пожизненно</td></tr>
+    <tr><td><div class="pn">Синус-лифтинг</div><div class="pd">Наращивание костной ткани перед имплантацией</div></td><td class="pp">от 18 000 ₽</td><td class="pg">—</td></tr>
+  </tbody></table>
+
+  <h3 class="pcat reveal">Протезирование и эстетика</h3>
+  <table class="ptable reveal"><thead><tr><th>Услуга</th><th>Цена</th><th>Гарантия</th></tr></thead><tbody>
+    <tr><td><div class="pn">Коронка металлокерамика</div><div class="pd">Прочная и эстетичная коронка</div></td><td class="pp">от 12 000 ₽</td><td class="pg">2 года</td></tr>
+    <tr><td><div class="pn">Коронка из диоксида циркония</div><div class="pd">Максимальная эстетика, без металла</div></td><td class="pp">от 22 000 ₽</td><td class="pg">3 года</td></tr>
+    <tr><td><div class="pn">Винир керамический</div><div class="pd">Голливудская улыбка с 3D-моделированием результата</div></td><td class="pp">от 18 000 ₽</td><td class="pg">5 лет</td></tr>
+    <tr><td><div class="pn">Отбеливание зубов</div><div class="pd">Осветление на 4–8 тонов за одно посещение</div></td><td class="pp">от 12 000 ₽</td><td class="pg">—</td></tr>
+    <tr><td><div class="pn">Профгигиена (Ultrasonic + Air Flow)</div><div class="pd">Снятие налёта и камня, полировка</div></td><td class="pp">от 4 500 ₽</td><td class="pg">—</td></tr>
+  </tbody></table>
+
+  <h3 class="pcat reveal">Ортодонтия</h3>
+  <table class="ptable reveal"><thead><tr><th>Услуга</th><th>Цена</th><th>Гарантия</th></tr></thead><tbody>
+    <tr><td><div class="pn">Брекеты металлические (1 челюсть)</div><div class="pd">Классическая надёжная система</div></td><td class="pp">от 35 000 ₽</td><td class="pg">—</td></tr>
+    <tr><td><div class="pn">Элайнеры (полный курс)</div><div class="pd">Прозрачные капы, незаметны на зубах</div></td><td class="pp">от 90 000 ₽</td><td class="pg">—</td></tr>
+  </tbody></table>
+
+  <h3 class="pcat reveal">Детская стоматология</h3>
+  <table class="ptable reveal"><thead><tr><th>Услуга</th><th>Цена</th><th>Гарантия</th></tr></thead><tbody>
+    <tr><td><div class="pn">Лечение молочного зуба</div><div class="pd">В игровой форме, без стресса для ребёнка</div></td><td class="pp">от 2 000 ₽</td><td class="pg">—</td></tr>
+    <tr><td><div class="pn">Герметизация фиссур</div><div class="pd">Профилактика кариеса жевательных зубов</div></td><td class="pp">от 1 500 ₽</td><td class="pg">—</td></tr>
+    <tr><td><div class="pn">Лечение во сне / под седацией</div><div class="pd">Под контролем команды анестезиологов</div></td><td class="pp">от 12 000 ₽</td><td class="pg">—</td></tr>
+  </tbody></table>
 </div></section>
 
-<section class="block"><div class="wrap">
-  <div class="section-head center reveal"><span class="section-tag">Пакеты</span><h2 class="section-title">Готовые решения</h2></div>
-  <div class="price-grid">
-    <div class="plan reveal s1"><h3>Профилактика</h3><div class="from">для здоровой улыбки</div><div class="cost">4 000 ₽</div><ul><li>Осмотр и консультация</li><li>Чистка Air Flow</li><li>Снятие зубного камня</li><li>Полировка и фторирование</li></ul><a href="kontakty.html#zapis" class="btn btn-ghost" style="width:100%;text-align:center">Записаться</a></div>
-    <div class="plan popular reveal s2"><div class="badge">ПОПУЛЯРНОЕ</div><h3>Лечение «под ключ»</h3><div class="from">кариес + гигиена</div><div class="cost">9 900 ₽</div><ul><li>Всё из «Профилактики»</li><li>Лечение до 2 зубов</li><li>Эстетичные пломбы</li><li>Контрольный осмотр бесплатно</li></ul><a href="kontakty.html#zapis" class="btn" style="width:100%;text-align:center">Записаться</a></div>
-    <div class="plan reveal s3"><h3>Имплантация</h3><div class="from">восстановление зуба</div><div class="cost">35 000 ₽</div><ul><li>Имплант премиум-бренда</li><li>Установка за один визит</li><li>Временная коронка</li><li>Пожизненная гарантия импланта</li></ul><a href="kontakty.html#zapis" class="btn btn-ghost" style="width:100%;text-align:center">Записаться</a></div>
+<section class="block" style="padding-top:0"><div class="wrap">
+  <div class="cta-strip reveal">
+    <h2>Не уверены, что именно нужно?</h2>
+    <p>Приходите на бесплатную консультацию — врач осмотрит, сделает 3D-снимок и составит точный план лечения с ценами.</p>
+    <a href="kontakty.html#zapis" class="btn">Записаться на приём</a>
   </div>
 </div></section>
 
@@ -98,5 +165,86 @@
   <div class="foot-bot"><span>© 2026 Стоматология «ЛУМИНА». Демо-проект.</span><span>Сделано как кейс веб-студии</span></div>
 </div></footer>
 <script src="app.js"></script>
+<script>
+(function(){
+  var root=document.getElementById('toothCalc');if(!root)return;
+  var SYM={
+    adult:[
+      {k:'a1',t:'Чувствительность к холодному, горячему, сладкому',d:'Начальный кариес, реминерализация',p:2500},
+      {k:'a2',t:'Кариозная полость, застревает пища',d:'Лечение кариеса и пломба',p:4000},
+      {k:'a3',t:'Ноющая боль, боль при накусывании, боль ночью',d:'Лечение пульпита и каналов',p:9000},
+      {k:'a4',t:'Скол или трещина зуба',d:'Художественная реставрация',p:5000},
+      {k:'a5',t:'Потемнение, некрасивый внешний вид',d:'Винир, эстетическая реставрация',p:12000},
+      {k:'a6',t:'Кровоточивость и воспаление дёсен',d:'Лечение дёсен',p:3500},
+      {k:'a7',t:'Зуб сильно разрушен или отсутствует',d:'Коронка или имплантация',p:18000},
+      {k:'a8',t:'Неправильное положение, скученность',d:'Ортодонтия — брекеты или элайнеры',p:8000}
+    ],
+    child:[
+      {k:'c1',t:'Кариес молочного зуба',d:'Лечение кариеса',p:2000},
+      {k:'c2',t:'Зубная боль',d:'Лечение пульпита молочного зуба',p:3500},
+      {k:'c3',t:'Травма или скол',d:'Реставрация',p:2500},
+      {k:'c4',t:'Профилактика',d:'Герметизация фиссур, фторирование',p:1500}
+    ]
+  };
+  var COUNT={adult:7,child:5};
+  var state={mode:'adult',active:null,sel:{adult:{},child:{}}};
+  var numById={};
+  var elArch=document.getElementById('tcArch'),elSym=document.getElementById('tcSymptoms'),elSum=document.getElementById('tcSummary'),elTot=document.getElementById('tcTotal');
+  function fmt(n){var s=String(n),o='',c=0,i;for(i=s.length-1;i>=0;i--){o=s.charAt(i)+o;c++;if(c%3===0&&i>0)o=' '+o;}return o+' ₽';}
+  function arch(){
+    elArch.innerHTML='';numById={};
+    var n=COUNT[state.mode];
+    [['ur','ul'],['lr','ll']].forEach(function(quads){
+      var rd=document.createElement('div');rd.className='tc-row';
+      quads.forEach(function(q){
+        var qd=document.createElement('div');qd.className='tc-quad';
+        var nums=[],i;for(i=1;i<=n;i++)nums.push(i);
+        if(q==='ur'||q==='lr')nums.reverse();
+        nums.forEach(function(num){
+          var id=q+num;numById[id]=num;
+          var b=document.createElement('button');b.type='button';b.className='tooth';b.textContent=num;
+          if(state.active===id)b.className+=' active';
+          if(state.sel[state.mode][id]&&Object.keys(state.sel[state.mode][id]).length)b.className+=' filled';
+          b.onclick=function(){state.active=id;render();};
+          qd.appendChild(b);
+        });
+        rd.appendChild(qd);
+      });
+      elArch.appendChild(rd);
+    });
+  }
+  function syms(){
+    elSym.innerHTML='';
+    if(!state.active){elSym.innerHTML='<div class="tc-empty">Выберите беспокоящий зуб на схеме слева, чтобы указать симптомы</div>';return;}
+    var h=document.createElement('div');h.className='tc-symhead';h.textContent='Зуб № '+numById[state.active]+' — что беспокоит?';elSym.appendChild(h);
+    SYM[state.mode].forEach(function(s){
+      var on=state.sel[state.mode][state.active]&&state.sel[state.mode][state.active][s.k];
+      var l=document.createElement('label');l.className='tc-sym'+(on?' on':'');
+      l.innerHTML='<input type="checkbox" '+(on?'checked':'')+'><span class="tc-symt">'+s.t+'<i>'+s.d+'</i></span><b>от '+fmt(s.p)+'</b>';
+      l.querySelector('input').onchange=function(e){
+        var m=state.sel[state.mode];if(!m[state.active])m[state.active]={};
+        if(e.target.checked)m[state.active][s.k]=s.p;else delete m[state.active][s.k];
+        if(!Object.keys(m[state.active]).length)delete m[state.active];
+        render();
+      };
+      elSym.appendChild(l);
+    });
+  }
+  function summary(){
+    var m=state.sel[state.mode],total=0,html='',ids=Object.keys(m);
+    ids.forEach(function(id){
+      var keys=Object.keys(m[id]),sub=0;keys.forEach(function(k){sub+=m[id][k];});total+=sub;
+      var names=SYM[state.mode].filter(function(s){return keys.indexOf(s.k)>-1;}).map(function(s){return s.d;}).join(', ');
+      html+='<div class="tc-line"><span>Зуб № '+numById[id]+' · '+names+'</span><b>от '+fmt(sub)+'</b></div>';
+    });
+    elSum.innerHTML=html||'<div class="tc-empty">Пока ничего не выбрано</div>';
+    elTot.textContent=ids.length?('от '+fmt(total)):'0 ₽';
+  }
+  function render(){arch();syms();summary();}
+  root.querySelectorAll('.tc-tab').forEach(function(t){t.onclick=function(){root.querySelectorAll('.tc-tab').forEach(function(x){x.className='tc-tab';});t.className='tc-tab on';state.mode=t.getAttribute('data-mode');state.active=null;render();};});
+  var clr=document.getElementById('tcClear');if(clr)clr.onclick=function(){state.sel[state.mode]={};state.active=null;render();};
+  render();
+})();
+</script>
 </body>
 </html>
