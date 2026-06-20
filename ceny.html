@@ -13,13 +13,21 @@
 .tc-tab.on{background:var(--accent,#10a3a3);color:#fff}
 .tc-note{font-size:13px;color:var(--muted,#5c7682);background:var(--soft2,#f6fbfc);border-radius:12px;padding:10px 14px;margin:14px 0 22px;line-height:1.45}
 .tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.tc-arch{display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;padding:22px;background:var(--soft2,#f6fbfc);border-radius:18px}
-.tc-row{display:flex;gap:20px}
-.tc-quad{display:flex;gap:6px}
-.tooth{width:30px;height:38px;border:1.5px solid #cfd6d3;background:#fff;border-radius:8px 8px 13px 13px;font-size:12px;font-weight:700;color:#5a6b66;cursor:pointer;transition:.15s}
-.tooth:hover{border-color:var(--accent,#10a3a3);transform:translateY(-2px)}
-.tooth.active{border-color:var(--accent,#10a3a3);box-shadow:0 0 0 3px rgba(16,163,163,.18)}
-.tooth.filled{background:var(--accent,#10a3a3);color:#fff;border-color:var(--accent,#10a3a3)}
+.tc-arch{display:flex;flex-direction:column;gap:clamp(8px,2.4vw,18px);align-items:center;justify-content:center;padding:clamp(10px,2.6vw,22px);background:var(--soft2,#f6fbfc);border-radius:18px;overflow-x:auto}
+.tc-jaw{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted,#7a8c93);font-weight:700}
+.tc-row{display:flex;gap:clamp(6px,2vw,20px);align-items:flex-end}
+.tc-quad{display:flex;gap:clamp(1px,.45vw,5px)}
+.tooth{width:clamp(12px,4.2vw,28px);flex:none;background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.tooth .tsvg{width:100%;height:auto;display:block;transition:.18s}
+.tooth .tsvg path{fill:#fff;stroke:#b9c9c9;stroke-width:1.6;transition:.15s}
+.tooth:hover .tsvg path{stroke:var(--accent,#10a3a3)}
+.tooth.active .tsvg path{stroke:var(--accent,#10a3a3);stroke-width:2.6}
+.tooth.filled .tsvg path{fill:var(--accent,#10a3a3);stroke:var(--accent,#10a3a3)}
+.tc-row.upper .tsvg{transform:rotate(180deg)}
+.tc-row.lower .tooth:hover .tsvg{transform:translateY(-3px)}
+.tc-row.upper .tooth:hover .tsvg{transform:rotate(180deg) translateY(3px)}
+.tnum{font-size:clamp(8px,2.3vw,12px);font-weight:700;color:var(--muted,#5c7682);line-height:1}
+.tooth.active .tnum,.tooth.filled .tnum{color:var(--accent-deep,#0a7d7d)}
 .tc-symhead{font-weight:700;margin-bottom:14px;font-size:17px}
 .tc-sym{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line,#dde9ed);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.15s}
 .tc-sym:hover{border-color:var(--accent,#10a3a3)}
@@ -52,6 +60,7 @@
 .ptable .pg{white-space:nowrap;color:var(--accent,#10a3a3);font-size:13px}
 .pcat{font-weight:800;font-size:20px;margin:38px 0 14px}
 @media(max-width:760px){.tc-grid{grid-template-columns:1fr}.ptable thead{display:none}.ptable td{display:block;border:0;padding:3px 16px}.ptable td.pp,.ptable td.pg{padding-bottom:14px}.ptable tr{display:block;border-top:1px solid var(--soft2,#eef6f8);padding:12px 0}}
+@media(max-width:560px){.tc{padding:14px}}
 </style>
 </head>
 <body>
@@ -175,6 +184,7 @@
 <script>
 (function(){
   var root=document.getElementById('toothCalc');if(!root)return;
+  var TOOTH='<svg class="tsvg" viewBox="0 0 32 40" aria-hidden="true"><path d="M16 2C9 2 4 6 4 13C4 18 6 21 7 26C7.6 30 7.4 38 10 38C12 38 11.7 30 13 29C14 28.2 14.8 28 16 28C17.2 28 18 28.2 19 29C20.3 30 20 38 22 38C24.6 38 24.4 30 25 26C26 21 28 18 28 13C28 6 23 2 16 2Z"/></svg>';
   var SYM={
     adult:[
       {k:'a1',t:'Чувствительность к холодному, горячему, сладкому',d:'Вероятно начальный кариес',opts:[
@@ -241,15 +251,16 @@
   function arch(){
     elArch.innerHTML='';numById={};
     var n=COUNT[state.mode];
-    [['ur','ul'],['lr','ll']].forEach(function(quads){
-      var rd=document.createElement('div');rd.className='tc-row';
+    [['ur','ul'],['lr','ll']].forEach(function(quads,ri){
+      var rd=document.createElement('div');rd.className='tc-row '+(ri===0?'upper':'lower');
       quads.forEach(function(q){
         var qd=document.createElement('div');qd.className='tc-quad';
         var nums=[],i;for(i=1;i<=n;i++)nums.push(i);
         if(q==='ur'||q==='lr')nums.reverse();
         nums.forEach(function(num){
           var id=q+num;numById[id]=num;
-          var b=document.createElement('button');b.type='button';b.className='tooth';b.textContent=num;
+          var b=document.createElement('button');b.type='button';b.className='tooth';
+          b.innerHTML=TOOTH+'<span class="tnum">'+num+'</span>';
           if(state.active===id)b.className+=' active';
           if(state.sel[state.mode][id]&&Object.keys(state.sel[state.mode][id]).length)b.className+=' filled';
           b.onclick=function(){state.active=id;render();};
@@ -262,7 +273,7 @@
   }
   function syms(){
     elSym.innerHTML='';
-    if(!state.active){elSym.innerHTML='<div class="tc-empty">Выберите беспокоящий зуб на схеме слева, чтобы указать проблему</div>';return;}
+    if(!state.active){elSym.innerHTML='<div class="tc-empty">Выберите беспокоящий зуб на схеме, чтобы указать проблему</div>';return;}
     var h=document.createElement('div');h.className='tc-symhead';h.textContent='Зуб № '+numById[state.active]+' — что беспокоит?';elSym.appendChild(h);
     var picks=state.sel[state.mode][state.active]||{};
     SYM[state.mode].forEach(function(s){
