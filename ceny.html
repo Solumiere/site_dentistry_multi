@@ -13,9 +13,13 @@
 .tc-tab.on{background:var(--accent,#10a3a3);color:#fff}
 .tc-note{font-size:13px;color:var(--muted,#5c7682);background:var(--soft2,#f6fbfc);border-radius:12px;padding:10px 14px;margin:14px 0 22px;line-height:1.45}
 .tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.tc-arch{display:flex;flex-direction:column;gap:clamp(8px,2.4vw,18px);align-items:center;justify-content:center;padding:clamp(10px,2.6vw,22px);background:var(--soft2,#f6fbfc);border-radius:18px;overflow-x:auto}
-.tc-jaw{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted,#7a8c93);font-weight:700}
-.tc-row{display:flex;gap:clamp(6px,2vw,20px);align-items:flex-end}
+.tc-arch{display:flex;flex-direction:column;gap:clamp(6px,2vw,14px);align-items:center;justify-content:center;padding:clamp(10px,2.6vw,22px);background:var(--soft2,#f6fbfc);border-radius:18px;overflow-x:auto}
+.tc-jaw{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted,#7a8c93);font-weight:700;margin:2px 0}
+.tc-sides{display:flex;width:100%;max-width:360px;gap:10px;margin-bottom:2px}
+.tc-sides span{flex:1;text-align:center;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted,#7a8c93);font-weight:700}
+.tc-mid{align-self:stretch;border-left:2px dashed var(--line,#cfe0e5);margin:0 clamp(3px,1.4vw,10px)}
+.tc-orient{font-size:12px;color:var(--muted,#5c7682);text-align:center;margin-top:8px;line-height:1.4}
+.tc-row{display:flex;gap:clamp(4px,1.4vw,12px);align-items:flex-end}
 .tc-quad{display:flex;gap:clamp(1px,.45vw,5px)}
 .tooth{width:clamp(12px,4.2vw,28px);flex:none;background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
 .tooth .tsvg{width:100%;height:auto;display:block;transition:.18s}
@@ -104,7 +108,7 @@
       <button class="tc-tab on" data-mode="adult" type="button">Для взрослых</button>
       <button class="tc-tab" data-mode="child" type="button">Для детей</button>
     </div>
-    <div class="tc-note">На схеме 28 зубов — без «зубов мудрости». Кликните по беспокоящему зубу, отметьте проблему и выберите конкретный вариант лечения — покажем примерную стоимость.</div>
+    <div class="tc-note">На схеме 28 зубов — без «зубов мудрости». Схема показана как при взгляде на вас: <b>правая</b> сторона вашего рта — <b>слева</b> на схеме. Нажмите на зуб — увидите его название, затем отметьте проблему и выберите вариант лечения.</div>
     <div class="tc-grid">
       <div id="tcArch" class="tc-arch"></div>
       <div id="tcSymptoms"></div>
@@ -243,38 +247,52 @@
     ]
   };
   var COUNT={adult:7,child:5};
+  var QUAD={ur:'Верхний правый',ul:'Верхний левый',lr:'Нижний правый',ll:'Нижний левый'};
+  var POS={adult:['центральный резец','боковой резец','клык','первый премоляр','второй премоляр','первый моляр','второй моляр'],child:['центральный резец','боковой резец','клык','первый моляр','второй моляр']};
   var state={mode:'adult',active:null,sel:{adult:{},child:{}}};
-  var numById={};
+  var numById={},nameById={};
   var elArch=document.getElementById('tcArch'),elSym=document.getElementById('tcSymptoms'),elSum=document.getElementById('tcSummary'),elTot=document.getElementById('tcTotal');
   function fmt(n){var s=String(n),o='',c=0,i;for(i=s.length-1;i>=0;i--){o=s.charAt(i)+o;c++;if(c%3===0&&i>0)o=' '+o;}return o+' ₽';}
   function findSym(k){var a=SYM[state.mode],i;for(i=0;i<a.length;i++){if(a[i].k===k)return a[i];}return null;}
   function arch(){
-    elArch.innerHTML='';numById={};
+    elArch.innerHTML='';numById={};nameById={};
     var n=COUNT[state.mode];
-    [['ur','ul'],['lr','ll']].forEach(function(quads,ri){
-      var rd=document.createElement('div');rd.className='tc-row '+(ri===0?'upper':'lower');
-      quads.forEach(function(q){
+    function tooth(q,num){
+      var id=q+num;numById[id]=num;
+      var nm=QUAD[q]+', '+POS[state.mode][num-1];nameById[id]=nm;
+      var b=document.createElement('button');b.type='button';b.className='tooth';
+      b.title=nm;b.setAttribute('aria-label',nm);
+      b.innerHTML=TOOTH+'<span class="tnum">'+num+'</span>';
+      if(state.active===id)b.className+=' active';
+      if(state.sel[state.mode][id]&&Object.keys(state.sel[state.mode][id]).length)b.className+=' filled';
+      b.onclick=function(){state.active=id;render();};
+      return b;
+    }
+    function row(quads,cls){
+      var rd=document.createElement('div');rd.className='tc-row '+cls;
+      quads.forEach(function(q,qi){
         var qd=document.createElement('div');qd.className='tc-quad';
         var nums=[],i;for(i=1;i<=n;i++)nums.push(i);
         if(q==='ur'||q==='lr')nums.reverse();
-        nums.forEach(function(num){
-          var id=q+num;numById[id]=num;
-          var b=document.createElement('button');b.type='button';b.className='tooth';
-          b.innerHTML=TOOTH+'<span class="tnum">'+num+'</span>';
-          if(state.active===id)b.className+=' active';
-          if(state.sel[state.mode][id]&&Object.keys(state.sel[state.mode][id]).length)b.className+=' filled';
-          b.onclick=function(){state.active=id;render();};
-          qd.appendChild(b);
-        });
+        nums.forEach(function(num){qd.appendChild(tooth(q,num));});
         rd.appendChild(qd);
+        if(qi===0){var mid=document.createElement('div');mid.className='tc-mid';rd.appendChild(mid);}
       });
-      elArch.appendChild(rd);
-    });
+      return rd;
+    }
+    var sides=document.createElement('div');sides.className='tc-sides';
+    sides.innerHTML='<span>Правая сторона</span><span>Левая сторона</span>';
+    elArch.appendChild(sides);
+    var ju=document.createElement('div');ju.className='tc-jaw';ju.textContent='Верхняя челюсть';elArch.appendChild(ju);
+    elArch.appendChild(row(['ur','ul'],'upper'));
+    elArch.appendChild(row(['lr','ll'],'lower'));
+    var jl=document.createElement('div');jl.className='tc-jaw';jl.textContent='Нижняя челюсть';elArch.appendChild(jl);
+    var orient=document.createElement('div');orient.className='tc-orient';orient.textContent='Наведите или нажмите на зуб — покажем его название';elArch.appendChild(orient);
   }
   function syms(){
     elSym.innerHTML='';
     if(!state.active){elSym.innerHTML='<div class="tc-empty">Выберите беспокоящий зуб на схеме, чтобы указать проблему</div>';return;}
-    var h=document.createElement('div');h.className='tc-symhead';h.textContent='Зуб № '+numById[state.active]+' — что беспокоит?';elSym.appendChild(h);
+    var h=document.createElement('div');h.className='tc-symhead';h.textContent=nameById[state.active]+' — что беспокоит?';elSym.appendChild(h);
     var picks=state.sel[state.mode][state.active]||{};
     SYM[state.mode].forEach(function(s){
       var chosen=picks[s.k];var on=chosen!==undefined;
@@ -309,7 +327,8 @@
         var s=findSym(sk);if(!s)return;
         var ok=m[id][sk],o=null,i;for(i=0;i<s.opts.length;i++){if(s.opts[i].ok===ok)o=s.opts[i];}
         if(!o)return;total+=o.p;
-        html+='<div class="tc-line"><span>Зуб № '+numById[id]+' · '+o.n+'</span><b>от '+fmt(o.p)+'</b></div>';
+        var label=nameById[id]||'Зуб';
+        html+='<div class="tc-line"><span>'+label+' · '+o.n+'</span><b>от '+fmt(o.p)+'</b></div>';
       });
     });
     elSum.innerHTML=html||'<div class="tc-empty">Пока ничего не выбрано</div>';
