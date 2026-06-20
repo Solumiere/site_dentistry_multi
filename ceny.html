@@ -3,48 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Цены на стоматологию ЛУМИНА в Иркутске. Онлайн-калькулятор лечения зубов и подробный прайс с гарантиями.">
+<meta name="description" content="Цены на стоматологию ЛУМИНА в Иркутске. Онлайн-калькулятор лечения зубов с выбором конкретной процедуры и подробный прайс с гарантиями.">
 <title>Цены и калькулятор лечения — ЛУМИНА</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.tc{background:#fff;border:1px solid var(--line,#e8e6e1);border-radius:24px;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,.05)}
-.tc-tabs{display:inline-flex;background:var(--soft2,#f4f1ec);border-radius:999px;padding:5px;margin-bottom:6px}
-.tc-tab{border:0;background:transparent;padding:10px 22px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer;color:var(--muted,#6b6b6b)}
-.tc-tab.on{background:var(--accent,#0e8f7e);color:#fff}
-.tc-note{font-size:13px;color:var(--muted,#7a7a7a);background:var(--soft2,#f6f4ef);border-radius:12px;padding:10px 14px;margin:14px 0 22px;line-height:1.45}
+.tc{background:#fff;border:1px solid var(--line,#dde9ed);border-radius:24px;padding:28px;box-shadow:0 20px 50px rgba(14,39,51,.06)}
+.tc-tabs{display:inline-flex;background:var(--soft2,#f6fbfc);border:1px solid var(--line,#dde9ed);border-radius:999px;padding:5px;margin-bottom:6px}
+.tc-tab{border:0;background:transparent;padding:10px 22px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer;color:var(--muted,#5c7682)}
+.tc-tab.on{background:var(--accent,#10a3a3);color:#fff}
+.tc-note{font-size:13px;color:var(--muted,#5c7682);background:var(--soft2,#f6fbfc);border-radius:12px;padding:10px 14px;margin:14px 0 22px;line-height:1.45}
 .tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.tc-arch{display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;padding:22px;background:var(--soft2,#f6f4ef);border-radius:18px}
+.tc-arch{display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;padding:22px;background:var(--soft2,#f6fbfc);border-radius:18px}
 .tc-row{display:flex;gap:20px}
 .tc-quad{display:flex;gap:6px}
 .tooth{width:30px;height:38px;border:1.5px solid #cfd6d3;background:#fff;border-radius:8px 8px 13px 13px;font-size:12px;font-weight:700;color:#5a6b66;cursor:pointer;transition:.15s}
-.tooth:hover{border-color:var(--accent,#0e8f7e);transform:translateY(-2px)}
-.tooth.active{border-color:var(--accent,#0e8f7e);box-shadow:0 0 0 3px rgba(14,143,126,.18)}
-.tooth.filled{background:var(--accent,#0e8f7e);color:#fff;border-color:var(--accent,#0e8f7e)}
+.tooth:hover{border-color:var(--accent,#10a3a3);transform:translateY(-2px)}
+.tooth.active{border-color:var(--accent,#10a3a3);box-shadow:0 0 0 3px rgba(16,163,163,.18)}
+.tooth.filled{background:var(--accent,#10a3a3);color:#fff;border-color:var(--accent,#10a3a3)}
 .tc-symhead{font-weight:700;margin-bottom:14px;font-size:17px}
-.tc-sym{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line,#e8e6e1);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.15s}
-.tc-sym:hover{border-color:var(--accent,#0e8f7e)}
-.tc-sym.on{border-color:var(--accent,#0e8f7e);background:rgba(14,143,126,.06)}
-.tc-sym input{width:18px;height:18px;accent-color:var(--accent,#0e8f7e);flex:none}
+.tc-sym{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line,#dde9ed);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.15s}
+.tc-sym:hover{border-color:var(--accent,#10a3a3)}
+.tc-sym.on{border-color:var(--accent,#10a3a3);background:rgba(16,163,163,.06)}
+.tc-sym input{width:18px;height:18px;accent-color:var(--accent,#10a3a3);flex:none}
 .tc-symt{flex:1;font-size:14px;line-height:1.3}
-.tc-symt i{display:block;font-style:normal;font-size:12px;color:var(--muted,#8a8a8a);margin-top:3px}
-.tc-sym b{white-space:nowrap;font-size:14px}
-.tc-empty{color:var(--muted,#9a9a9a);font-size:14px;padding:24px 6px;text-align:center;line-height:1.5}
-.tc-sum{margin-top:26px;border-top:1px dashed var(--line,#ddd);padding-top:20px}
-.tc-line{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:14px;border-bottom:1px solid var(--soft2,#f0ede8)}
+.tc-symt i{display:block;font-style:normal;font-size:12px;color:var(--muted,#5c7682);margin-top:3px}
+.tc-opts{margin:2px 0 12px 8px;display:flex;flex-direction:column;gap:7px;padding-left:16px;border-left:2px solid rgba(16,163,163,.3)}
+.tc-opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid var(--line,#dde9ed);border-radius:11px;cursor:pointer;transition:.15s}
+.tc-opt:hover{border-color:var(--accent,#10a3a3)}
+.tc-opt.on{border-color:var(--accent,#10a3a3);background:rgba(16,163,163,.07)}
+.tc-opt input{width:17px;height:17px;accent-color:var(--accent,#10a3a3);flex:none}
+.tc-optt{flex:1;font-size:13.5px;line-height:1.3}
+.tc-optt i{display:block;font-style:normal;font-size:12px;color:var(--muted,#5c7682);margin-top:2px}
+.tc-opt b{white-space:nowrap;font-size:13.5px;color:var(--accent-deep,#0a7d7d)}
+.tc-empty{color:var(--muted,#5c7682);font-size:14px;padding:24px 6px;text-align:center;line-height:1.5}
+.tc-sum{margin-top:26px;border-top:1px dashed var(--line,#dde9ed);padding-top:20px}
+.tc-line{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:14px;border-bottom:1px solid var(--soft2,#f0f6f8)}
 .tc-foot{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px;flex-wrap:wrap}
-.tc-total{font-size:14px;color:var(--muted,#777)}
-.tc-total b{display:block;font-size:30px;color:var(--ink,#1a1a1a);font-weight:800;margin-top:2px}
-#tcClear{border:0;background:transparent;color:var(--muted,#888);cursor:pointer;font:inherit;text-decoration:underline;margin-top:12px}
-.tc-disc{font-size:12px;color:var(--muted,#9a9a9a);margin-top:16px;line-height:1.5}
-.ptable{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line,#e8e6e1);border-radius:16px;overflow:hidden}
-.ptable th{background:var(--soft2,#f4f1ec);text-align:left;padding:13px 18px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted,#6b6b6b)}
-.ptable td{padding:14px 18px;border-top:1px solid var(--soft2,#f0ede8);vertical-align:top;font-size:14px}
+.tc-total{font-size:14px;color:var(--muted,#5c7682)}
+.tc-total b{display:block;font-size:30px;color:var(--ink,#0e2733);font-weight:800;margin-top:2px}
+#tcClear{border:0;background:transparent;color:var(--muted,#5c7682);cursor:pointer;font:inherit;text-decoration:underline;margin-top:12px}
+.tc-disc{font-size:12px;color:var(--muted,#5c7682);margin-top:16px;line-height:1.5}
+.ptable{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line,#dde9ed);border-radius:16px;overflow:hidden}
+.ptable th{background:var(--soft2,#f6fbfc);text-align:left;padding:13px 18px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted,#5c7682)}
+.ptable td{padding:14px 18px;border-top:1px solid var(--soft2,#f0f6f8);vertical-align:top;font-size:14px}
 .ptable .pn{font-weight:600}
-.ptable .pd{color:var(--muted,#7a7a7a);font-size:13px;margin-top:3px;line-height:1.4}
+.ptable .pd{color:var(--muted,#5c7682);font-size:13px;margin-top:3px;line-height:1.4}
 .ptable .pp{white-space:nowrap;font-weight:700}
-.ptable .pg{white-space:nowrap;color:var(--accent,#0e8f7e);font-size:13px}
+.ptable .pg{white-space:nowrap;color:var(--accent,#10a3a3);font-size:13px}
 .pcat{font-weight:800;font-size:20px;margin:38px 0 14px}
-@media(max-width:760px){.tc-grid{grid-template-columns:1fr}.ptable thead{display:none}.ptable td{display:block;border:0;padding:3px 16px}.ptable td.pp,.ptable td.pg{padding-bottom:14px}.ptable tr{display:block;border-top:1px solid var(--soft2,#eee);padding:12px 0}}
+@media(max-width:760px){.tc-grid{grid-template-columns:1fr}.ptable thead{display:none}.ptable td{display:block;border:0;padding:3px 16px}.ptable td.pp,.ptable td.pg{padding-bottom:14px}.ptable tr{display:block;border-top:1px solid var(--soft2,#eef6f8);padding:12px 0}}
 </style>
 </head>
 <body>
@@ -78,7 +85,7 @@
 <section class="phead"><div class="wrap">
   <div class="crumbs"><a href="index.html">Главная</a> / Цены</div>
   <h1>Цены и онлайн-расчёт</h1>
-  <p>Отметьте беспокоящие зубы на схеме — калькулятор покажет примерную стоимость. Ниже — подробный прайс с описаниями и гарантиями.</p>
+  <p>Отметьте беспокоящий зуб на схеме, выберите проблему и подходящий вариант лечения — калькулятор покажет примерную стоимость. Ниже — подробный прайс с описаниями и гарантиями.</p>
 </div></section>
 
 <section class="block"><div class="wrap">
@@ -88,7 +95,7 @@
       <button class="tc-tab on" data-mode="adult" type="button">Для взрослых</button>
       <button class="tc-tab" data-mode="child" type="button">Для детей</button>
     </div>
-    <div class="tc-note">На схеме 28 зубов — без «зубов мудрости». Кликните по беспокоящему зубу и отметьте симптомы — покажем примерную стоимость лечения.</div>
+    <div class="tc-note">На схеме 28 зубов — без «зубов мудрости». Кликните по беспокоящему зубу, отметьте проблему и выберите конкретный вариант лечения — покажем примерную стоимость.</div>
     <div class="tc-grid">
       <div id="tcArch" class="tc-arch"></div>
       <div id="tcSymptoms"></div>
@@ -170,20 +177,59 @@
   var root=document.getElementById('toothCalc');if(!root)return;
   var SYM={
     adult:[
-      {k:'a1',t:'Чувствительность к холодному, горячему, сладкому',d:'Начальный кариес, реминерализация',p:2500},
-      {k:'a2',t:'Кариозная полость, застревает пища',d:'Лечение кариеса и пломба',p:4000},
-      {k:'a3',t:'Ноющая боль, боль при накусывании, боль ночью',d:'Лечение пульпита и каналов',p:9000},
-      {k:'a4',t:'Скол или трещина зуба',d:'Художественная реставрация',p:5000},
-      {k:'a5',t:'Потемнение, некрасивый внешний вид',d:'Винир, эстетическая реставрация',p:12000},
-      {k:'a6',t:'Кровоточивость и воспаление дёсен',d:'Лечение дёсен',p:3500},
-      {k:'a7',t:'Зуб сильно разрушен или отсутствует',d:'Коронка или имплантация',p:18000},
-      {k:'a8',t:'Неправильное положение, скученность',d:'Ортодонтия — брекеты или элайнеры',p:8000}
+      {k:'a1',t:'Чувствительность к холодному, горячему, сладкому',d:'Вероятно начальный кариес',opts:[
+        {ok:'o1',n:'Реминерализация и фторирование',d:'Без сверления, укрепление эмали',p:2500},
+        {ok:'o2',n:'Лечение кариеса с пломбой',d:'Если уже образовалась полость',p:4000}
+      ]},
+      {k:'a2',t:'Кариозная полость, застревает пища',d:'Кариес',opts:[
+        {ok:'o1',n:'Пломба светового отверждения',d:'Композит, шлифовка и полировка',p:4000},
+        {ok:'o2',n:'Керамическая вкладка',d:'При сильном разрушении коронки',p:14000}
+      ]},
+      {k:'a3',t:'Острая или ноющая боль, боль ночью',d:'Пульпит — нужно лечение каналов',opts:[
+        {ok:'o1',n:'Лечение 1-канального зуба',d:'Под микроскопом, горячая заливка',p:9000},
+        {ok:'o2',n:'Лечение 2-канального зуба',d:'Под микроскопом, горячая заливка',p:12000},
+        {ok:'o3',n:'Лечение 3-канального зуба',d:'Под микроскопом, горячая заливка',p:15000}
+      ]},
+      {k:'a4',t:'Скол или трещина зуба',d:'Реставрация',opts:[
+        {ok:'o1',n:'Художественная реставрация композитом',d:'Восстановление формы и цвета',p:5000},
+        {ok:'o2',n:'Винир керамический',d:'При большом сколе во фронтальной зоне',p:18000}
+      ]},
+      {k:'a5',t:'Потемнение, некрасивый внешний вид',d:'Эстетика',opts:[
+        {ok:'o1',n:'Профессиональное отбеливание',d:'Осветление на 4–8 тонов',p:12000},
+        {ok:'o2',n:'Винир керамический',d:'Изменение формы и цвета',p:18000}
+      ]},
+      {k:'a6',t:'Кровоточивость и воспаление дёсен',d:'Пародонтология',opts:[
+        {ok:'o1',n:'Профгигиена Ultrasonic + Air Flow',d:'Снятие налёта и камня',p:4500},
+        {ok:'o2',n:'Курс лечения дёсен',d:'Чистка карманов, терапия',p:7000}
+      ]},
+      {k:'a7',t:'Зуб сильно разрушен или отсутствует',d:'Восстановление зуба',opts:[
+        {ok:'o1',n:'Коронка металлокерамика',d:'Прочная и эстетичная',p:12000},
+        {ok:'o2',n:'Коронка из диоксида циркония',d:'Максимальная эстетика, без металла',p:22000},
+        {ok:'o3',n:'Имплантация под ключ',d:'Имплант премиум-бренда + коронка',p:35000}
+      ]},
+      {k:'a8',t:'Неправильное положение, скученность',d:'Ортодонтия',opts:[
+        {ok:'o1',n:'Брекеты металлические (1 челюсть)',d:'Классическая надёжная система',p:35000},
+        {ok:'o2',n:'Элайнеры (полный курс)',d:'Прозрачные капы, незаметны',p:90000}
+      ]}
     ],
     child:[
-      {k:'c1',t:'Кариес молочного зуба',d:'Лечение кариеса',p:2000},
-      {k:'c2',t:'Зубная боль',d:'Лечение пульпита молочного зуба',p:3500},
-      {k:'c3',t:'Травма или скол',d:'Реставрация',p:2500},
-      {k:'c4',t:'Профилактика',d:'Герметизация фиссур, фторирование',p:1500}
+      {k:'c1',t:'Кариес молочного зуба',d:'Лечение в игровой форме',opts:[
+        {ok:'o1',n:'Лечение кариеса молочного зуба',d:'Цветная пломба на выбор ребёнка',p:2000},
+        {ok:'o2',n:'Серебрение / фторирование',d:'Остановка кариеса без сверления',p:1200}
+      ]},
+      {k:'c2',t:'Зубная боль у ребёнка',d:'Возможен пульпит',opts:[
+        {ok:'o1',n:'Лечение пульпита молочного зуба',d:'Бережно, без стресса',p:3500}
+      ]},
+      {k:'c3',t:'Травма или скол молочного зуба',d:'Реставрация',opts:[
+        {ok:'o1',n:'Реставрация молочного зуба',d:'Восстановление формы',p:2500}
+      ]},
+      {k:'c4',t:'Профилактика кариеса',d:'Защита зубов',opts:[
+        {ok:'o1',n:'Герметизация фиссур',d:'Защита жевательных зубов',p:1500},
+        {ok:'o2',n:'Фторирование всех зубов',d:'Укрепление эмали',p:2000}
+      ]},
+      {k:'c5',t:'Сильный страх лечения',d:'Лечение во сне или под седацией',opts:[
+        {ok:'o1',n:'Лечение под седацией',d:'В присутствии анестезиолога',p:12000}
+      ]}
     ]
   };
   var COUNT={adult:7,child:5};
@@ -191,6 +237,7 @@
   var numById={};
   var elArch=document.getElementById('tcArch'),elSym=document.getElementById('tcSymptoms'),elSum=document.getElementById('tcSummary'),elTot=document.getElementById('tcTotal');
   function fmt(n){var s=String(n),o='',c=0,i;for(i=s.length-1;i>=0;i--){o=s.charAt(i)+o;c++;if(c%3===0&&i>0)o=' '+o;}return o+' ₽';}
+  function findSym(k){var a=SYM[state.mode],i;for(i=0;i<a.length;i++){if(a[i].k===k)return a[i];}return null;}
   function arch(){
     elArch.innerHTML='';numById={};
     var n=COUNT[state.mode];
@@ -215,30 +262,47 @@
   }
   function syms(){
     elSym.innerHTML='';
-    if(!state.active){elSym.innerHTML='<div class="tc-empty">Выберите беспокоящий зуб на схеме слева, чтобы указать симптомы</div>';return;}
+    if(!state.active){elSym.innerHTML='<div class="tc-empty">Выберите беспокоящий зуб на схеме слева, чтобы указать проблему</div>';return;}
     var h=document.createElement('div');h.className='tc-symhead';h.textContent='Зуб № '+numById[state.active]+' — что беспокоит?';elSym.appendChild(h);
+    var picks=state.sel[state.mode][state.active]||{};
     SYM[state.mode].forEach(function(s){
-      var on=state.sel[state.mode][state.active]&&state.sel[state.mode][state.active][s.k];
-      var l=document.createElement('label');l.className='tc-sym'+(on?' on':'');
-      l.innerHTML='<input type="checkbox" '+(on?'checked':'')+'><span class="tc-symt">'+s.t+'<i>'+s.d+'</i></span><b>от '+fmt(s.p)+'</b>';
-      l.querySelector('input').onchange=function(e){
+      var chosen=picks[s.k];var on=chosen!==undefined;
+      var wrap=document.createElement('div');
+      var lab=document.createElement('label');lab.className='tc-sym'+(on?' on':'');
+      lab.innerHTML='<input type="checkbox" '+(on?'checked':'')+'><span class="tc-symt">'+s.t+'<i>'+s.d+'</i></span>';
+      lab.querySelector('input').onchange=function(e){
         var m=state.sel[state.mode];if(!m[state.active])m[state.active]={};
-        if(e.target.checked)m[state.active][s.k]=s.p;else delete m[state.active][s.k];
-        if(!Object.keys(m[state.active]).length)delete m[state.active];
+        if(e.target.checked){m[state.active][s.k]=s.opts[0].ok;}
+        else{delete m[state.active][s.k];if(!Object.keys(m[state.active]).length)delete m[state.active];}
         render();
       };
-      elSym.appendChild(l);
+      wrap.appendChild(lab);
+      if(on){
+        var oc=document.createElement('div');oc.className='tc-opts';
+        s.opts.forEach(function(o){
+          var osel=(chosen===o.ok);
+          var ol=document.createElement('label');ol.className='tc-opt'+(osel?' on':'');
+          ol.innerHTML='<input type="radio" name="opt_'+state.active+'_'+s.k+'" '+(osel?'checked':'')+'><span class="tc-optt">'+o.n+(o.d?'<i>'+o.d+'</i>':'')+'</span><b>от '+fmt(o.p)+'</b>';
+          ol.querySelector('input').onchange=function(){state.sel[state.mode][state.active][s.k]=o.ok;render();};
+          oc.appendChild(ol);
+        });
+        wrap.appendChild(oc);
+      }
+      elSym.appendChild(wrap);
     });
   }
   function summary(){
     var m=state.sel[state.mode],total=0,html='',ids=Object.keys(m);
     ids.forEach(function(id){
-      var keys=Object.keys(m[id]),sub=0;keys.forEach(function(k){sub+=m[id][k];});total+=sub;
-      var names=SYM[state.mode].filter(function(s){return keys.indexOf(s.k)>-1;}).map(function(s){return s.d;}).join(', ');
-      html+='<div class="tc-line"><span>Зуб № '+numById[id]+' · '+names+'</span><b>от '+fmt(sub)+'</b></div>';
+      Object.keys(m[id]).forEach(function(sk){
+        var s=findSym(sk);if(!s)return;
+        var ok=m[id][sk],o=null,i;for(i=0;i<s.opts.length;i++){if(s.opts[i].ok===ok)o=s.opts[i];}
+        if(!o)return;total+=o.p;
+        html+='<div class="tc-line"><span>Зуб № '+numById[id]+' · '+o.n+'</span><b>от '+fmt(o.p)+'</b></div>';
+      });
     });
     elSum.innerHTML=html||'<div class="tc-empty">Пока ничего не выбрано</div>';
-    elTot.textContent=ids.length?('от '+fmt(total)):'0 ₽';
+    elTot.textContent=html?('от '+fmt(total)):'0 ₽';
   }
   function render(){arch();syms();summary();}
   root.querySelectorAll('.tc-tab').forEach(function(t){t.onclick=function(){root.querySelectorAll('.tc-tab').forEach(function(x){x.className='tc-tab';});t.className='tc-tab on';state.mode=t.getAttribute('data-mode');state.active=null;render();};});
